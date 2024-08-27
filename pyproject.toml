@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "anom_int_2024"
+version = "1.0"
+authors = [
+  { name="Gabriel Guerrer", email="gabrielguerrer@gmail.com" },
+]
+description = "Anomalous Interactions 2024"
+readme = "README.md"
+requires-python = ">=3.7"
+dependencies = [
+    "rng_rava == 1.2.1",
+    "pyserial == 3.5",
+    "numpy == 1.26.4",
+    "scipy == 1.14.0",
+    "matplotlib == 3.9.1",
+    "sqlalchemy == 2.0.31"
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/gabrielguerrer/anom_int_2024"

@@ -25,6 +25,7 @@ Download and extract the [v1.0 release](https://github.com/gabrielguerrer/anom_i
 To build and install the `anom_int_2024` package, run the following commands. The necessary dependencies will be automatically installed in your environment:
 ```
 cd ~/Downloads/anom_int_2024-1.0/
+pip install build
 python3 -m build
 pip install dist/anom_int_2024-1.0-py3-none-any.whl
 ```

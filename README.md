@@ -1,11 +1,11 @@
 # Anomalous Interactions 2024
 
-This software framework supports the research titled "The Case of Anomalous Psychophysical Interactions: Investigating an Unconventional Hypothesis Within a Methodologically Rigorous Framework".  
+This software framework supports the research titled "Investigating the Claim of Anomalous Psychophysical Interactions Using a Rigorous Metascientific Framework".  
 It provides functionality for simulations, data collection, and data analysis.
 
 Relevant links:
-- [Preregistration Document]() <!-- To be updated -->
-- [Research Article]() <!-- To be updated -->
+- [OSF Project](https://osf.io/vuscn) : It includes the two preregistration documents, the collected data, and a preprint describing the study’s findings.
+<!--- [Research Article]()  To be updated -->
 
 
 ## Installation
@@ -20,7 +20,7 @@ python3 -m venv ~/env/anom_int_2024
 source ~/env/anom_int_2024/bin/activate
 ```
 
-Download and extract the [v1.0 release](https://github.com/gabrielguerrer/anom_int_2024/releases) to a directory, which we'll refer to as `~/Downloads/anom_int_2024-1.0/`.  
+Download and extract the [v1.0 release](https://github.com/gabrielguerrer/anom_int_2024/archive/refs/tags/v1.0.zip) to a directory, which we'll refer to as `~/Downloads/anom_int_2024-1.0/`.
 
 To build and install the `anom_int_2024` package, run the following commands. The necessary dependencies will be automatically installed in your environment:
 ```
@@ -50,6 +50,19 @@ The database files are located in the `~/.rava` directory.
 - [matplotlib v3.9.1](https://github.com/matplotlib/matplotlib)
 - [sqlalchemy v2.0.31](https://github.com/sqlalchemy/sqlalchemy)
 
+
+## Results
+
+To reproduce the results obtained in the preregistered studies:
+
+- Download the study data from the [OSF Project](https://osf.io/vuscn) website
+- As described above, activate the environment and run the analysis module using `python3 -m anom_int_2024.analysis`
+- In the "database" section, click "..." to select the `.db` file, then click "Connect"
+- In the "filter" section, the `sess_group` variable specifies whether the data correspond to the first or second preregistered study. The `sess_type` variable selects one of the four experiments 
+  - Choose the desired study (PR1 or PR2) and experiment
+- In the "analysis" section, under the "prereg" tab, click "Analyze". The probability outcomes for participant and sham sessions are displayed in the "results" box
+
+![Analysis](https://github.com/gabrielguerrer/anom_int_2024/blob/main/images/analysis.png)
 
 ## Contact
 

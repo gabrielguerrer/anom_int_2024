@@ -11,6 +11,7 @@ Relevant links:
 ## Installation
 
 The operating system used in the mentioned research and on which this framework has been extensively tested is [Linux Debian v12](https://www.debian.org/releases/bookworm/).
+
 Ensure that Python 3.11 is installed. If not, it can be downloaded [here](https://www.python.org/downloads/release/python-31115/).
 
 Create and activate a virtual environment, replacing `~/env/anom_int_2024` with your preferred directory name:
@@ -135,7 +136,7 @@ By replacing real-time byte generation (every 100 ms) with pregenerated data, th
 
 The group functionality governs the simulation process by specifying the number of sessions to be simulated for each experiment in both standard and fast modes.
 
-The “Type = Auto” option is enforced in both simulation modes. This means that, even if it is not explicitly selected here, it will be applied during the simulations, ensuring a random selection of experiment types without replacement within each block of four experiments.
+The "Type = Auto" option is enforced in both simulation modes. This means that, even if it is not explicitly selected here, it will be applied during the simulations, ensuring a random selection of experiment types without replacement within each block of four experiments.
 
 ### Standard Mode
 
@@ -225,6 +226,8 @@ The fast simulation results shown for the first preregistration (PR1) were obtai
 - Specify the number of sections to combine for each p'-value in the "Comb N" field. In this case, a value of 60 is provided, resulting in 1000 p'-values used to populate the output histogram
 - Select the number of bins for the histogram
 - Click "Uniformity p-values" to analyze the sessions, plot the histograms, and perform the chi-square test of the uniformity hypothesis.
+
+Note: Plot generation fails in Python 3.14. Ensure that Python 3.11 is used.
 
 
 ## Contact

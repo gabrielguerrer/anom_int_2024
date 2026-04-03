@@ -1,9 +1,9 @@
 # Anomalous Interactions 2024
 
-This software framework supports the research titled "Investigating the Claim of Anomalous Psychophysical Interactions Using a Rigorous Metascientific Framework". It provides functionality for simulations, data collection, and data analysis.
+This software framework supports the research titled "Investigating the Claim of Anomalous Psychophysical Interactions Using a Rigorous Metascientific Framework". It provides functionality for data collection, data analysis, and simulations.
 
 Relevant links:
-- [OSF Project](https://osf.io/vuscn) : It includes the two preregistration documents and the collected data.
+- [OSF Project](https://osf.io/vuscn) : It includes the two preregistration documents (PR1 and PR2) and the collected data.
 - [OSF Preprint](https://osf.io/preprints/psyarxiv/wkjdu_v1) : A preprint describing the study’s findings; the article has been submitted to a scientific journal and is currently under peer review.
 <!--- [Research Article]()  To be updated -->
 
@@ -33,8 +33,8 @@ pip install dist/anom_int_2024-1.0-py3-none-any.whl
 With the `~/env/anom_int_2024` environment activated, the three modules can be executed using the following commands:
 ```
 python3 -m anom_int_2024.experiments
-python3 -m anom_int_2024.simulations
 python3 -m anom_int_2024.analysis
+python3 -m anom_int_2024.simulations
 ```
 
 ### Requirements
@@ -75,7 +75,7 @@ All created groups can be viewed in the “View” tab.
 
 ![Groups example](https://github.com/gabrielguerrer/anom_int_2024/blob/main/images/groups.png)
 
-The image above shows the group definition used in the study’s first preregistration: 60 sessions were assigned to each of the four experiments, with experiment types randomly selected throughout the course of the study.
+The image above shows the group definition used in the study’s first preregistration (PR1): 60 sessions were assigned to each of the four experiments, with experiment types randomly selected throughout the course of the study.
 
 
 ### Participant Sessions
@@ -111,6 +111,46 @@ This file serves as the input to the analysis module.
 By clicking on “Results” in the main application panel, the experimenter can view a list of all collected participant sessions, including the date, group ID, participant ID, and corresponding star rating. This functionality is provided to allow the experimenter to track contributions - for example, to determine how many sessions a given participant has completed.
 
 The actual p-values computed by the analysis procedure are not accessible to the experimenter.
+
+
+## Analysis
+The analysis module performs the preregistered analyses, computing p-values for individual participant and sham sessions based on the experiment type, and combining them into a p'-value using Fisher’s method.
+To run it, activate the environment and execute:
+
+```
+python3 -m anom_int_2024.analysis
+```
+
+### Preregistered Analysis
+
+To reproduce the preregistered study results, follow these steps:
+
+- Download the study database from the [OSF Project](https://osf.io/vuscn) website
+- As described above, activate the environment and run the analysis module using `python3 -m anom_int_2024.analysis`
+- In the "Database" section, click "..." to select the `.db` file, then click "Connect"
+- In the "Filter" section, the `sess_group` variable specifies whether the data correspond to the first or second preregistered study. The `sess_type` variable selects one of the four experiments 
+  - Choose the desired study (PR1 or PR2) and one of the four experiments
+  - In the "Data" field it is possible to see the the total number of sessions in the database; how many sessions remain after filtering; and which sessions are currently selected (indicated by the blue highlight). Multiple sessions can be chosen by using Shift + left mouse click, or by clicking "Select all"  
+- In the "Analysis" section, under the "Prereg" tab, click "Analyze"
+  - The analysis is performed on the sessions selected in the “Data” field, with a p-value computed for each selected session
+  - The combined p' probability outcomes for participant and sham sessions are displayed in the "Results" box
+
+![Preregistered Analysis](https://github.com/gabrielguerrer/anom_int_2024/blob/main/images/analysis.png)
+
+
+### Fast Simulation analysis
+
+The fast simulation results shown for the first preregistration (PR1) were obtained by running the fast simulation procedure described in the next section, generating 60,000 sessions for each experiment. The resulting `sim.db` file is then processed using the Anaylis module as follows:
+
+- Activate the environment and run the analysis module `python3 -m anom_int_2024.analysis`
+- In the "Database" section, click "..." to select the simulation `.db` file, then click "Connect"
+- In the "Filter" section, select one of the four experiments in the `sess_type` field
+- Navigate to the "Fast Sim" tab in the "Analysis section"
+- Specify the number of sections to combine for each p'-value in the "Comb N" field. In this case, a value of 60 is provided, resulting in 1000 p'-values used to populate the output histogram
+- Select the number of bins for the histogram
+- Click "Uniformity p-values" to analyze the sessions, plot the histograms, and perform the chi-square test of the uniformity hypothesis.
+
+Note: Plot generation fails in Python 3.14. Ensure that Python 3.11 is used.
 
 
 ## Simulations
@@ -176,7 +216,7 @@ The generation of random byte files is described in the next section.
 
 ### RAVA Random File Generation
 
-To generate files containing random bytes, use the data acquisition module of the [python driver](https://github.com/gabrielguerrer/rng_rava_driver_py) is used. To run it, activate the enviroment as as described above, and run:
+To generate files containing random bytes, use the data acquisition module of the [python driver](https://github.com/gabrielguerrer/rng_rava_driver_py) is used. To run it, activate the enviroment and run:
 
 ``` 
 python3 -m rng_rava.tk.acq
@@ -190,45 +230,34 @@ Click "Generate". A progress window will appear, showing the evolution of the da
 ![RAVA byte generation screen](https://github.com/gabrielguerrer/anom_int_2024/blob/main/images/byte_file_generation.png)
 
 
-## Analysis
-The analysis module performs the preregistered analyses, computing p-values for individual participant and sham sessions based on the experiment type, and combining them into a p'-value using Fisher’s method.
-To run it, activate the environment and execute:
+## FAQ
 
+### The instructions during the initial 3 minutes and in the star rating are in Portuguese. How can they be changed?
+
+After downloading and extracting the v1.0 release: 
+- Modify the `./src/anom_int_2024/experiments/exp_parameters.py` file by updating the `TXT_SESS_*` and `TXT_STAR_*` variables accordingly
+
+Proceed with the build and installation as usual.
 ```
-python3 -m anom_int_2024.analysis
+pip install build
+python3 -m build
+pip install dist/anom_int_2024-1.0-py3-none-any.whl
 ```
 
-### Preregistered Analysis
+### Is it possible to use this software framework with RAVA firmware v2.0.0?
 
-To reproduce the preregistered study results, follow these steps:
+Yes. After downloading and extracting the v1.0 release: 
+- Modify the `./pyproject.toml` file by updating the `rng_rava` dependency from version `1.2.1` to `2.0.0`
+- Modify the `./src/anom_int_2024/experiments/exp_parameters.py` file by replacing `D_PWM_FREQ` to `D_PWM_BOOST_FREQ` in lines 17 and 67
+- Modify the `./src/anom_int_2024/experiments/exp_base.py` file by replacing `self.rng.snd_pwm_setup` to `self.rng.snd_pwm_boost_setup` in line 114
+- Modify the `./src/anom_int_2024/simulations/rng_from_file.py` file by replacing `def snd_pwm_setup` to `def snd_pwm_boost_setup` in line 46
 
-- Download the study database from the [OSF Project](https://osf.io/vuscn) website
-- As described above, activate the environment and run the analysis module using `python3 -m anom_int_2024.analysis`
-- In the "Database" section, click "..." to select the `.db` file, then click "Connect"
-- In the "Filter" section, the `sess_group` variable specifies whether the data correspond to the first or second preregistered study. The `sess_type` variable selects one of the four experiments 
-  - Choose the desired study (PR1 or PR2) and one of the four experiments
-  - In the "Data" field it is possible to see the the total number of sessions in the database; how many sessions remain after filtering; and which sessions are currently selected (indicated by the blue highlight). Multiple sessions can be chosen by using Shift + left mouse click, or by clicking "Select all"  
-- In the "Analysis" section, under the "Prereg" tab, click "Analyze"
-  - The analysis is performed on the sessions selected in the “Data” field, with a p-value computed for each selected session
-  - The combined p' probability outcomes for participant and sham sessions are displayed in the "Results" box
-
-![Preregistered Analysis](https://github.com/gabrielguerrer/anom_int_2024/blob/main/images/analysis.png)
-
-
-### Fast Simulation analysis
-
-The fast simulation results shown for the first preregistration (PR1) were obtained by running the fast simulation procedure previously described, generating 60,000 sessions for each experiment. The resulting `sim.db` file is then processed using the Anaylis module as follows:
-
-- Activate the environment and run the analysis module `python3 -m anom_int_2024.analysis`
-- In the "Database" section, click "..." to select the simulation `.db` file, then click "Connect"
-- In the "Filter" section, select one of the four experiments in the `sess_type` field
-- Navigate to the "Fast Sim" tab in the "Analysis section"
-- Specify the number of sections to combine for each p'-value in the "Comb N" field. In this case, a value of 60 is provided, resulting in 1000 p'-values used to populate the output histogram
-- Select the number of bins for the histogram
-- Click "Uniformity p-values" to analyze the sessions, plot the histograms, and perform the chi-square test of the uniformity hypothesis.
-
-Note: Plot generation fails in Python 3.14. Ensure that Python 3.11 is used.
-
+Proceed with the build and installation as usual, the framework should then work as expected.
+```
+pip install build
+python3 -m build
+pip install dist/anom_int_2024-1.0-py3-none-any.whl
+```
 
 ## Contact
 

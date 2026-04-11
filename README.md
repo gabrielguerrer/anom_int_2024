@@ -7,6 +7,8 @@ Relevant links:
 - [OSF Preprint](https://osf.io/preprints/psyarxiv/wkjdu_v1) : A preprint describing the study’s findings; the article has been submitted to a scientific journal and is currently under peer review.
 <!--- [Research Article]()  To be updated -->
 
+This research employs the RAVA device, an open-source Random Number Generator:
+- RAVA [Schematics](https://github.com/gabrielguerrer/rng_rava) | [Firmware](https://github.com/gabrielguerrer/rng_rava_firmware) | [Python Driver](https://github.com/gabrielguerrer/rng_rava_driver_py) 
 
 ## Installation
 
@@ -91,6 +93,8 @@ The bottom panel displays how many participant sessions remain to complete the s
 
 To start the experiment, click on "Start". The first 3 minutes are dedicated to participant relaxation.
 This is followed by 5 minutes of visual feedback (a circle with varying diameter), during which the participant is instructed to mentally intend an increase in the circle's diameter. At the end of the session, a star rating (from 1 to 3) is displayed, reflecting the rarity of the outcome.
+
+![Feedback circle](https://github.com/gabrielguerrer/anom_int_2024/blob/main/images/feedback_circle.png)
 
 ### Sham Sessions
 
@@ -232,19 +236,19 @@ Click "Generate". A progress window will appear, showing the evolution of the da
 
 ## FAQ
 
-### The instructions during the initial 3 minutes and in the star rating are in Portuguese. How can they be changed?
-
+<details>
+  <summary>The instructions during the initial 3 minutes and in the star rating are in Portuguese. How can they be changed?</summary>
+  
 After downloading and extracting the v1.0 release: 
 - Modify the `./src/anom_int_2024/experiments/exp_parameters.py` file by updating the `TXT_SESS_*` and `TXT_STAR_*` variables accordingly
 
 Proceed with the build and installation as usual.
-```
-pip install build
-python3 -m build
-pip install dist/anom_int_2024-1.0-py3-none-any.whl
-```
+  
+</details>
+<br>
 
-### Is it possible to use this software framework with RAVA firmware v2.0.0?
+<details>
+  <summary> Is it possible to use this software framework with RAVA firmware v2.0.0?  </summary>
 
 Yes. After downloading and extracting the v1.0 release: 
 - Modify the `./pyproject.toml` file by updating the `rng_rava` dependency from version `1.2.1` to `2.0.0`
@@ -252,15 +256,14 @@ Yes. After downloading and extracting the v1.0 release:
 - Modify the `./src/anom_int_2024/experiments/exp_base.py` file by replacing `self.rng.snd_pwm_setup` to `self.rng.snd_pwm_boost_setup` in line 114
 - Modify the `./src/anom_int_2024/simulations/rng_from_file.py` file by replacing `def snd_pwm_setup` to `def snd_pwm_boost_setup` in line 46
 
-Proceed with the build and installation as usual, the framework should then work as expected.
-```
-pip install build
-python3 -m build
-pip install dist/anom_int_2024-1.0-py3-none-any.whl
-```
+Proceed with the build and installation as usual.
+
+</details>
+
 
 ## Contact
 
+[https://gabrielguerrer.com](https://gabrielguerrer.com)  
 gabrielguerrer [at] gmail [dot] com
 
 ![RAVA logo](https://github.com/gabrielguerrer/rng_rava/blob/main/images/rng_rava_logo.png)

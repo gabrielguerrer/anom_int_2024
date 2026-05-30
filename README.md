@@ -1,5 +1,8 @@
 # Anomalous Interactions 2024
 
+[![Author](https://img.shields.io/badge/Author-gabrielguerrer.com-blue)](https://gabrielguerrer.com)
+[![Publication](https://img.shields.io/badge/Publication-Preprint-purple)](https://osf.io/preprints/psyarxiv/wkjdu_v1)
+
 This software framework supports the research titled "Investigating the Claim of Anomalous Psychophysical Interactions Using a Rigorous Metascientific Framework". It provides functionality for data collection, data analysis, and simulations.
 
 Relevant links:
@@ -8,7 +11,7 @@ Relevant links:
 <!--- [Research Article]()  To be updated -->
 
 This research employs the RAVA device, an open-source Random Number Generator:
-- RAVA [Schematics](https://github.com/gabrielguerrer/rng_rava) | [Firmware](https://github.com/gabrielguerrer/rng_rava_firmware) | [Python Driver](https://github.com/gabrielguerrer/rng_rava_driver_py) 
+- RAVA [Schematics](https://github.com/gabrielguerrer/rava8_rng) | [Firmware](https://github.com/gabrielguerrer/rava8_rng_firmware) | [Python Driver](https://github.com/gabrielguerrer/rava_driver_py) 
 
 ## Installation
 
@@ -40,9 +43,9 @@ python3 -m anom_int_2024.simulations
 ```
 
 ### Requirements
-- [RAVA Circuit v1.0](https://github.com/gabrielguerrer/rng_rava)
-- [RAVA Firmware v1.0.0](https://github.com/gabrielguerrer/rng_rava_firmware)
-- [RAVA Driver v1.2.1](https://github.com/gabrielguerrer/rng_rava_driver_py)
+- [RAVA Circuit v1.0](https://github.com/gabrielguerrer/rava8_rng)
+- [RAVA Firmware v1.0.0](https://github.com/gabrielguerrer/rava8_rng_firmware)
+- [RAVA Driver v1.2.1](https://github.com/gabrielguerrer/rava_driver_py)
 - [Python v3.11](https://www.python.org/downloads/release/python-31115/)
 - [pyserial v3.5](https://github.com/pyserial/pyserial)
 - [numpy v1.26.4](https://github.com/numpy/numpy)
@@ -60,7 +63,7 @@ To run it, activate the environment as described above and execute:
 python3 -m anom_int_2024.experiments
 ```
 
-![Experiments screen](https://github.com/gabrielguerrer/anom_int_2024/blob/main/images/experiments.png)
+![Experiments screen](images/experiments.png)
 
 ### Groups
 
@@ -75,7 +78,7 @@ To create a group, click on “Groups”, and in the “Add” tab:
 
 All created groups can be viewed in the “View” tab.
 
-![Groups example](https://github.com/gabrielguerrer/anom_int_2024/blob/main/images/groups.png)
+![Groups example](images/groups.png)
 
 The image above shows the group definition used in the study’s first preregistration (PR1): 60 sessions were assigned to each of the four experiments, with experiment types randomly selected throughout the course of the study.
 
@@ -89,12 +92,12 @@ To start data collection, click on “New Session.” To run a participant sessi
 
 The bottom panel displays how many participant sessions remain to complete the selected group.
 
-![New session example](https://github.com/gabrielguerrer/anom_int_2024/blob/main/images/new_session.png)
+![New session example](images/new_session.png)
 
 To start the experiment, click on "Start". The first 3 minutes are dedicated to participant relaxation.
 This is followed by 5 minutes of visual feedback (a circle with varying diameter), during which the participant is instructed to mentally intend an increase in the circle's diameter. At the end of the session, a star rating (from 1 to 3) is displayed, reflecting the rarity of the outcome.
 
-![Feedback circle](https://github.com/gabrielguerrer/anom_int_2024/blob/main/images/feedback_circle.png)
+![Feedback circle](images/feedback_circle.png)
 
 ### Sham Sessions
 
@@ -139,7 +142,7 @@ To reproduce the preregistered study results, follow these steps:
   - The analysis is performed on the sessions selected in the “Data” field, with a p-value computed for each selected session
   - The combined p' probability outcomes for participant and sham sessions are displayed in the "Results" box
 
-![Preregistered Analysis](https://github.com/gabrielguerrer/anom_int_2024/blob/main/images/analysis.png)
+![Preregistered Analysis](images/analysis.png)
 
 
 ### Fast Simulation analysis
@@ -166,7 +169,7 @@ To run it, activate the environment and execute:
 python3 -m anom_int_2024.simulations
 ```
 
-![Simulations screen](https://github.com/gabrielguerrer/anom_int_2024/blob/main/images/simulations.png)
+![Simulations screen](images/simulations.png)
 
 Two different simulation methods are employed, each differing in their randomness input mechanism. 
 In the *standard mode*, data is collected following the predefined methodology, without participants observing the real-time feedback. 
@@ -187,7 +190,7 @@ The "Type = Auto" option is enforced in both simulation modes. This means that, 
 To conduct simulations in standard mode, click on "Simulations". Since data are generated in real time, a RAVA circuit must be connected.
 Select the corresponding group ID, specify the desired additional time delay (in minutes) between sessions, and click “Start” to initiate the simulation procedure.
 
-![Standard Simulation screen](https://github.com/gabrielguerrer/anom_int_2024/blob/main/images/simulation_standard.png)
+![Standard Simulation screen](images/simulation_standard.png)
 
 In the example above, the first preregistration (PR1) group is selected, which defines 60 participant sessions for each experiment. 
 The status bar at the bottom of the window displays the number of sessions remaining to be collected. In this case, the total is 2 x 4 x 60, as sham sessions are collected following each "participant" session - here in quotes, since in both cases no participant observes the feedback.
@@ -209,7 +212,7 @@ Then, click “Start” to initiate the fast simulation procedure.
 
 The procedure cannot be resumed if interrupted, so ensure sufficient time is available before starting. The session progress is displayed at the status bar at the bottom, indicating the number of sessions to finish.
 
-![Fast Simulation screen](https://github.com/gabrielguerrer/anom_int_2024/blob/main/images/simulation_fast.png)
+![Fast Simulation screen](images/simulation_fast.png)
 
 In the example above, the group used in the first preregistration (PR1) is selected. As 1000 repetitions of the 4 x 60 sessions are targeted, this corresponds to a total of 240,000 sessions. In this mode, only sham sessions are used, rather than the “participant"–sham sequence employed in standard mode.
 The status bar indicates that a total of 2 x 1.09 GB of RAVA-generated randomness is required.
@@ -231,7 +234,7 @@ Select the output path for the generated data and specify the ammount of random 
 No post-processing is required. Set "RNG Out" as "AB" to generate two separate files, one for each randomness core.
 Click "Generate". A progress window will appear, showing the evolution of the data generation.
 
-![RAVA byte generation screen](https://github.com/gabrielguerrer/anom_int_2024/blob/main/images/byte_file_generation.png)
+![RAVA byte generation screen](images/byte_file_generation.png)
 
 
 ## FAQ
@@ -263,7 +266,6 @@ Proceed with the build and installation as usual.
 
 ## Contact
 
-[https://gabrielguerrer.com](https://gabrielguerrer.com)  
-gabrielguerrer [at] gmail [dot] com
+[gabrielguerrer.com](https://gabrielguerrer.com/en/gabriel/)
 
-![RAVA logo](https://github.com/gabrielguerrer/rng_rava/blob/main/images/rng_rava_logo.png)
+[![RAVA logo](https://github.com/gabrielguerrer/rava8_rng/blob/main/images/rng_rava_logo.png)](https://rava-rng.org)
